@@ -9,8 +9,9 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/Arjun-P-Jayakrishnan/lcvs-cli.git/cmd"
 	"github.com/Arjun-P-Jayakrishnan/lcvs-cli.git/api"
+	"github.com/Arjun-P-Jayakrishnan/lcvs-cli.git/cmd"
+	//"github.com/Arjun-P-Jayakrishnan/lcvs-cli.git/api"
 )
 
 func main() {
@@ -27,9 +28,16 @@ func main() {
 		log.Fatal("No Port detected")
 	}
 
-	err := initServer()
+	routerDB := api.Router {
+		Port: portString,
+	}
+
+	err :=routerDB.Init()
 	if err!=nil {
 		log.Fatal(err)
 	}
+
 	cmd.Execute()
 }
+
+

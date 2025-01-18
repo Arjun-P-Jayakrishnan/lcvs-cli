@@ -8,21 +8,21 @@ import (
 	"github.com/go-chi/cors"
 )
 
-type dbRouter struct {
-	port string
+type Router struct {
+	Port string
 }
 
-func initServer(routerInfo dbRouter) error {
+func (routerInfo Router) Init() error {
 	//new router from chi
 	router := chi.NewRouter()
 
 	//http server
 	srv := &http.Server{
 		Handler: router,
-		Addr:    ":" + routerInfo.port,
+		Addr:    ":" + routerInfo.Port,
 	}
 
-	log.Printf("Starting port on %v", routerInfo.port)
+	log.Printf("Starting port on %v", routerInfo.Port)
 
 	//Listening on the port for inputs
 	srvErr := srv.ListenAndServe()
@@ -41,3 +41,4 @@ func initServer(routerInfo dbRouter) error {
 
 	return srvErr
 }
+
