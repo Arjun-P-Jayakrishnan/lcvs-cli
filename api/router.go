@@ -16,17 +16,6 @@ func (routerInfo Router) Init() error {
 	//new router from chi
 	router := chi.NewRouter()
 
-	//http server
-	srv := &http.Server{
-		Handler: router,
-		Addr:    ":" + routerInfo.Port,
-	}
-
-	log.Printf("Starting port on %v", routerInfo.Port)
-
-	//Listening on the port for inputs
-	srvErr := srv.ListenAndServe()
-
 	router.Use(
 		cors.Handler(cors.Options{
 			AllowedOrigins:   []string{"http://*", "https://*"},
@@ -37,7 +26,22 @@ func (routerInfo Router) Init() error {
 			MaxAge:           300,
 		}))
 
+	v1Router:=chi.NewRouter()
 
+	v1Router.Get("/healthz",handlerReadiness)
+	v1Router.Get("/err",handlerErr)
+	router.Mount("/v1",v1Router)
+
+	//http server
+	srv := &http.Server{
+		Handler: router,
+		Addr:    ":" + routerInfo.Port,
+	}
+
+	log.Printf("Starting port on %v", routerInfo.Port)
+
+	//Listening on the port for inputs
+	srvErr := srv.ListenAndServe()
 
 	return srvErr
 }
