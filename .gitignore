@@ -1,3 +1,6 @@
 .env
 lcvs-cli.git.exe
 vendor
+.lcvs/
+
+.lcvs-ignore
