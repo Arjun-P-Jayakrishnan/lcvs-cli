@@ -13,11 +13,13 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "lcvs",
 	Short: "Local Version Control System for semantic versioning",
-	Long: `LCVS or Local Version Control System is a version control documentation tool
-	 that focuses on research oriented version control and safe stores.
+	Long: `
 		
-	The main focus of this app is to create a system for sematic versioning of your save files
-	such that it gives you access to code in form of a research module
+		LCVS or Local Version Control System is a version control documentation tool
+	 	that focuses on research oriented version control and safe stores.
+		
+		The main focus of this app is to create a system for sematic versioning of your save files
+		such that it gives you access to code in form of a research module
 	`,
 }
 

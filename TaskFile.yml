@@ -1,10 +1,16 @@
 version: "3"
 
 tasks:
+
+    setup:
+        desc: Create Directory
+        cmds: 
+            - mkdir -p bin
+
     build:
         desc: Build the app
         cmds:
-        - GOFLAGS=-mod=mod go build -o bin/gopher-cli main.go 
+        - GOFLAGS=-mod=mod go build -o bin/lcvs.exe main.go 
 
     run: 
         desc: Run the app
@@ -15,3 +21,9 @@ tasks:
         desc: Remove all retrieved *.png files
         cmds:
         - rm *.png
+    
+    default :
+        desc : Build and Run the app
+        cmds : 
+        - task: build
+        - task: run 
